@@ -1,0 +1,225 @@
+%-----------------------------------------------------------------------
+%     Beginning of ofj-template.tex
+%-----------------------------------------------------------------------
+%
+%     This is a topmatter template file for OpenFOAM Journal with LaTeX.
+%
+%     Templates for various common text, math and figure elements are
+%     given following the \end{document} line.
+%     This file is based on the template provided by AMS.
+%
+%     Some parts of this document are based on OFW16 Bye-Laws
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-----------------------------------------------------------------------
+%      Copyright notice
+%-----------------------------------------------------------------------
+%
+%      Authors of papers published  in the OpenFOAM journal retain
+%      copyright and release their work under the
+%      Creative Commons Attribution-ShareAlike 4.0 International License.
+%      https://creativecommons.org/licenses/by-sa/4.0/
+%      Any code snippets included in the manuscript as well as submitted
+%      source code as supplementary material are subject to
+%      the GNU General Public Licence.
+%      http://www.gnu.org/licenses/gpl-3.0.html
+%      Any usage of the name OpenFOAM as well as the logo is being done
+%      with the full involvement of OpenCFD, trademark holder of
+%      OpenFOAM.
+%
+%-----------------------------------------------------------------------
+
+%-----------------------------------------------------------------------
+%      Please do not modify the entries in this section
+%-----------------------------------------------------------------------
+
+%     Remove any commented or uncommented macros you do not use.
+
+\documentclass[e-only,10pt,reqno]{ofj}
+
+%     OpenFOAM-specific tensor and finite-volume notation packages
+\usepackage{tensorNotation}
+\usepackage{finiteVolumeNotation}
+
+%    Other packages and commands
+\usepackage{setspace}
+\usepackage{lineno}
+\usepackage{color}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage[hang,flushmargin]{footmisc}
+\usepackage{orcidlink}
+\usepackage{cite}
+\usepackage{xspace} % Don't remove spaces following \mbox{} etc
+
+% hyperref should be loaded last, to prevent conflicts with other packages
+% For example, to prevent this warning: https://tex.stackexchange.com/q/16268/27863
+\usepackage[colorlinks=true,linkcolor=black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,runcolor=black,urlcolor=black]{hyperref}
+
+% Labels for tables, figures, equantions
+\def\tableautorefname{Tab.}
+\def\figureautorefname{Fig.}
+\def\equationautorefname{Eqn.}
+
+\newcommand{\authorcontributions}[1]{%
+\vspace{6pt}\noindent{\fontsize{9}{11.2}\selectfont\textbf{Author Contributions:} {#1}\par}}
+
+%    \paragraph gives the same as the main body so we will remove its definition
+%    \subsection and \subsubsection can be used if desired
+\let\paragraph\undefined
+
+% Copyright info - will be updated by the editor
+\copyrightinfo{2022}{The Authors. This work is an open access article under the {\color{blue}{\href{https://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}} license}
+%\numberwithin{equation}{section}%Please don't enable this for submission!
+\newcommand{\OF}[0]{OpenFOAM\textsuperscript{\textregistered}\xspace}
+
+%-----------------------------------------------------------------------
+%      Please modify the entries in this section according to your neeeds
+%-----------------------------------------------------------------------
+
+%    Please enter your OpenFOAM version
+%    This is the version(s) that was used to generate the results. If the
+%    procedures are compatible with other versions, this can be mentioned in the
+%    main body of the text.
+\OpenFOAMversions{\OF v20xx}
+
+%    Code repository (hidden in review)
+\ifdefined\review
+\Repository{}
+\else
+%    Please enter your repository - for final version
+\Repository{https://github.com/xxx}
+\fi
+
+\DOI{TBD} %leave for submission
+
+%    For review, use double spacing (build with 'make review')
+\ifdefined\review
+  \doublespacing
+\fi
+
+%-----------------------------------------------------------------------
+%      The manuscript starts here
+%-----------------------------------------------------------------------
+
+\begin{document}
+
+%-----------------------------------------------------------------------
+%      Manuscript title and author description
+%-----------------------------------------------------------------------
+
+
+%    \title[short text for running head]{full title}
+\title[\OF Journal publication]{\OF Journal publication}
+
+%    Author information - hide in review mode
+\ifdefined\review
+  \author{}
+  \address{}
+  \email{}
+\else
+%    Note: authors should not be defined for the review process as the review is double-blind
+%    Author names should be given as firstname followed by surname: see the examples below
+
+%    Only \author and \address are required; other information is
+%    optional.  Remove any unused author tags.
+
+%    \author[short version for running head]{name for top of paper}
+
+%    Corresponding author information
+%    Indicate the corresponding author with an asteriks
+%    You can optionally add an Orcid link
+\author[M. Jersey]{Maria Jersey$^{1,*}$\orcidlink{0000-1234-5678-0000}}
+\address{$^1$Address1}
+\email{Emailaddress1}
+
+%    Author two information
+\author[J. Smith]{John Smith$^2$}
+\address{$^2$Address2} % a different address; not needed if the same as author 1
+
+%   Author three information
+\author[P. Murphy]{Philip Murphy$^2$} % reuses the address ^2 defined above
+\fi
+
+
+%-----------------------------------------------------------------------
+%      Manuscript abstract
+%-----------------------------------------------------------------------
+
+\input{parts/abstract.tex}
+
+
+\date{\today}
+
+\dedicatory{}
+
+
+\maketitle
+
+%   Line numbering should be enable for review and disabled for final version
+\ifdefined\review
+  \linenumbers
+\else
+\fi
+
+\input{parts/introduction}
+
+%-----------------------------------------------------------------------
+%      Add more sections here
+%-----------------------------------------------------------------------
+\input{parts/section}
+
+\input{parts/conclusion}
+
+%-----------------------------------------------------------------------
+%      Start with acknowledgements here
+%-----------------------------------------------------------------------
+
+\ifdefined\review
+\else
+  \input{parts/acknowledgements.tex}
+
+  % The OpenFOAM Journal requires the contributions of all authors to be explicitly stated
+  % As noted below, please see \href{http://img.mdpi.org/data/contributor-role-instruction.pdf}{CRediT taxonomy} for the term explanation.
+  % Replace the example authors initials (F.A., S.A) below as appropriate
+  % 
+  % Please turn to http://img.mdpi.org/data/contributor-role-instruction.pdf (CRediT taxonomy) for the term explanation.
+  % 
+  \authorcontributions{
+  Conceptualisation, J.S.;
+  methodology, J.S.;
+  software, J.S;
+  validation, J.S. and P.M.;
+  formal analysis, J.S. and P.M.;
+  investigation, J.S.;
+  resources, P.M.;
+  data curation, P.M.;
+  writing---original draft preparation, J.S.;
+  writing---review and editing, J.S. and P.M.;
+  visualisation, J.S.;
+  supervision, P.M.;
+  project administration, P.M.;
+  funding acquisition, P.M.
+  All authors have read and agreed to the published version of the manuscript.
+  }
+\fi
+
+%-----------------------------------------------------------------------
+%      Start with appendices here
+%-----------------------------------------------------------------------
+
+% If required, include appendices here
+% \appendix
+% \input{parts/appendix.tex}
+
+
+%    Bibliographies can be prepared with BibTeX using IEEEtran style,
+\bibliographystyle{IEEEtran}%do not change
+
+\bibliography{Bibliography}
+
+\end{document}
+
+%-----------------------------------------------------------------------
+% End of ofj-template.tex
+%-----------------------------------------------------------------------
